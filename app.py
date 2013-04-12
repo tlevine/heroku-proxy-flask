@@ -6,7 +6,7 @@ from flask import Flask
 from flask import Response
 
 app = Flask(__name__)
-SEED = ##seed##
+SEED = 31172
 CANONICAL = 'http://appgen.herokuapp.com/'
 
 querystring = '?seed=' + unicode(SEED)
