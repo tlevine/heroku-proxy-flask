@@ -9,12 +9,14 @@ app = Flask(__name__)
 SEED = ##seed##
 CANONICAL = 'http://appgen.herokuapp.com/'
 
+querystring = '?seed=' + unicode(SEED)
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def proxy(path):
-    url = CANONICAL + path + '?seed=' + unicode(SEED)
+    url = CANONICAL + path + querystring
     f = urllib2.urlopen(url)
-    response = f.read()
+    response = f.read().replace(querystring, '') # remove seed
     status = f.getcode()
     headers = f.headers.dict
     content_type = headers.get('content-type', 'text/html')
