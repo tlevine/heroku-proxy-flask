@@ -12,7 +12,7 @@ CANONICAL = 'http://appgen.herokuapp.com/'
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def proxy(path):
-    url = CANONICAL + path + '?seed=' + unicode(SEED)
+    url = CANONICAL + path + '?seed=' + SEED
     f = urllib2.urlopen(url)
     response = f.read()
     status = f.getcode()
