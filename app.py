@@ -6,7 +6,7 @@ from flask import Flask
 from flask import Response
 
 app = Flask(__name__)
-SEED = ##seed##
+SEED = '23717'
 CANONICAL = 'http://appgen.herokuapp.com/'
 
 @app.route('/<path:path>')
