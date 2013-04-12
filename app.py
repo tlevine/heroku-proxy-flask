@@ -7,9 +7,9 @@ from flask import Response
 
 app = Flask(__name__)
 SEED = ##seed##
-CANONICAL = 'http://appgen.herokuapp.com'
+CANONICAL = 'http://appgen.herokuapp.com/'
 
-@app.route('<path:path>')
+@app.route('/<path:path>')
 def proxy(path):
     url = CANONICAL + path + '?seed=' + unicode(seed)
     f = urllib2.urlopen(url)
