@@ -6,12 +6,13 @@ from flask import Flask
 from flask import Response
 
 app = Flask(__name__)
-SEED = '23717'
+SEED = ##seed##
 CANONICAL = 'http://appgen.herokuapp.com/'
 
+@app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def proxy(path):
-    url = CANONICAL + path + '?seed=' + unicode(seed)
+    url = CANONICAL + path + '?seed=' + unicode(SEED)
     f = urllib2.urlopen(url)
     response = f.read()
     status = f.getcode()
