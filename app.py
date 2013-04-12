@@ -5,28 +5,19 @@ from flask import request
 from flask import Flask
 from flask import Response
 
-
 app = Flask(__name__)
+SEED = ##seed##
+CANONICAL = 'http://appgen.herokuapp.com'
 
-
-@app.route('/')
-def root():
-    """
-    Proxies the provided url
-    """
-    url = request.args.get('url', '')
-    usage = 'Pass a properly encoded url parameter e.g. /?url=http://www.google.com'
-
-    if url:
-        f = urllib2.urlopen(url)
-        response = f.read()
-        status = f.getcode()
-        headers = f.headers.dict
-        content_type = headers.get('content-type', 'text/html')
-
-        return Response(response=response, status=status, headers=headers, content_type=content_type)
-    else:
-        return usage
+@app.route('<path:path>')
+def proxy(path):
+    url = CANONICAL + path + '?seed=' + unicode(seed)
+    f = urllib2.urlopen(url)
+    response = f.read()
+    status = f.getcode()
+    headers = f.headers.dict
+    content_type = headers.get('content-type', 'text/html')
+    return Response(response=response, status=status, headers=headers, content_type=content_type)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
